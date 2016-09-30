@@ -9,11 +9,14 @@
   var timerInterval;
   var stopButton = $("#stop");
   var resetButton = $('#reset');
+  var body = $('body');
 
   //main functionality
   startButton.on("click", startTimer);
   breakButton.on('click', startBreak);
   stopButton.on('click', stopTimer);
+  resetButton.on('click', resetTimer);
+  body.onkey('click', stopTimer);
 
   //function definition
 function startBreak (){
@@ -29,17 +32,57 @@ function startBreak (){
   startTimer();
   }
 
+  document.body.onkeyup = function(e) {
+    console.log(timerInterval);
+    if (e.keycode ==32) {
+      e.preventDefault();
+      stopTimer();
+    }
+  };
+
+
   function startTimer (){
     console.log(timerInterval);
     if(!timerInterval){
       timerInterval = setInterval(countdown, 1000);
     }
-    }
+  }
 
   function stopTimer(){
     clearInterval(timerInterval);
     timerInterval = null;
+}
+
+  function resetTimer(){
+    //reset timer
+    console.log(timerInterval);
+    if(isOnBreak){
+      //empty timer cup
+      clearInterval(timerInterval);
+      timerInterval=null;
+      //add 5 minutes to cup
+      minutes.text('00');
+      seconds.text('08');
+      //reenable start button
+      startButton.attr('disabled', false);
+      //unhide the break button
+      breakButton.hide();
     }
+    else {
+      //reset to 25 minutes and empty timer cup
+      clearInterval(timerInterval);
+      timerInterval=null;
+      minutes.text('00');
+      seconds.text('10');
+      //disable start button
+      startButton.attr('disabled', false);
+      //hide break button
+      breakButton.hide();
+      isOnBreak=false;
+    }
+}
+
+
 
 
   function countdown(){
@@ -64,8 +107,8 @@ function startBreak (){
 
     } else {
 
-      minutes.text('00');
-      seconds.text('03');
+      minutes.text('25');
+      seconds.text('00');
       startButton.attr('disabled', false);
       isOnBreak = false;
     }
@@ -85,6 +128,7 @@ function startBreak (){
     var padSecondsTextAsNumber = pad(decreasedSecondsAsNumberByOne);
     seconds.text(padSecondsTextAsNumber);
   }
+
     // var secondsValue = parseInt(seconds.text());
     // console.log(secondsValue);
     // seconds.text(pad(secondsValue - 1));
