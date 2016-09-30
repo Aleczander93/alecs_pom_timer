@@ -1,0 +1,12 @@
+h1#timer {
+  font-size: 1800%;
+}
+
+#start {
+  font-size: 700%;
+}
+
+#break {
+  font-size: 700%;
+  display: none;
+}
