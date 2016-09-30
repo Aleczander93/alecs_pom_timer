@@ -10,3 +10,11 @@ h1#timer {
   font-size: 700%;
   display: none;
 }
+
+#reset {
+  font-size: 700%;
+}
+
+#stop {
+  font-size: 700%;
+}
