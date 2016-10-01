@@ -10,13 +10,14 @@
   var stopButton = $("#stop");
   var resetButton = $('#reset');
   var body = $('body');
+  var spaceBar = true;
 
   //main functionality
   startButton.on("click", startTimer);
   breakButton.on('click', startBreak);
   stopButton.on('click', stopTimer);
   resetButton.on('click', resetTimer);
-  body.onkey('click', stopTimer);
+  body.on('keyup', keyboardStop);
 
   //function definition
 function startBreak (){
@@ -32,14 +33,20 @@ function startBreak (){
   startTimer();
   }
 
-  document.body.onkeyup = function(e) {
-    console.log(timerInterval);
-    if (e.keycode ==32) {
-      e.preventDefault();
-      stopTimer();
-    }
-  };
+function keyboardStop(e){
+  if (e.keyCode == 32 && spaceBar) {
+    console.log('stuff');
+    e.preventDefault();
+    stopTimer();
+}
 
+  if (e.keyCode == 32){
+    spaceBar=false;
+    console.log('otherstuff');
+    e.preventDefault();
+    startTimer();
+}
+}
 
   function startTimer (){
     console.log(timerInterval);
