@@ -34,20 +34,20 @@ function startBreak (){
   }
 
 function keyboardStop(e){
-  if (e.keyCode == 32 && spaceBar) {
+  if (!spaceBar) {
+    e.keyCode = 32;
     console.log('stuff');
     e.preventDefault();
     stopTimer();
-}
-
-  if (e.keyCode == 32){
-    spaceBar=false;
+    spaceBar=true;
+} else {
+    e.keyCode = 32;
     console.log('otherstuff');
     e.preventDefault();
     startTimer();
+    spaceBar=false;
 }
 }
-
   function startTimer (){
     console.log(timerInterval);
     if(!timerInterval){
@@ -113,7 +113,6 @@ function keyboardStop(e){
         breakButton.show();
 
     } else {
-
       minutes.text('25');
       seconds.text('00');
       startButton.attr('disabled', false);
