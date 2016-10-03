@@ -9,13 +9,11 @@
   var isOnBreak = false;
   var isOnLong = false;
   var timerInterval;
-  var longInterval;
   var stopButton = $("#stop");
   var resetButton = $('#reset');
   var body = $('body');
   var spaceBar = true;
-  var click = 0;
-  var clicked = click +1;
+  var counter = $('#counter');
 
   //main functionality
   startButton.on("click", startTimer);
@@ -35,11 +33,11 @@ function startBreak (){
   seconds.text('05');
   //hide the break button
   breakButton.hide();
+  longButton.hide();
   //start the timer
   startTimer();
   // to count amt click
-  var clicked = click + 1;
-  console.log(clicked);
+
   }
 
 function startLong () {
@@ -50,6 +48,7 @@ function startLong () {
   seconds.text('05');
   //hide the long break button
   longButton.hide();
+  breakButton.hide();
   //start the timer
   startTimer();
 }
@@ -143,19 +142,22 @@ function keyboardStop(e) {
       clearInterval(timerInterval);
       timerInterval = null;
 
-
       if (!isOnBreak) {
         //disable the start button
         startButton.attr('disabled' , true);
         //unhide the break button
         breakButton.show();
+        //to count after each break
+        var counterText = counter.text ();
+        var countTextAsNumber = parseInt(counterText);
+        countTextAsNumber = countTextAsNumber + 1;
 
-      if (!isOnLong ) {
-        if(clicked >3){
+      if (!isOnLong && countTextAsNumber>3) {
         startButton.attr('disabled' , true);
         longButton.show();
-      }
-      }
+        breakButton.hide();
+        }
+
 
     } else {
       minutes.text('00');
@@ -165,7 +167,7 @@ function keyboardStop(e) {
       isOnlong = false;
     }
       return;
-  }
+    }
     if (secondsTextAsNumber === 0) {
       if (minutesTextAsNumber !== 0){
       var decreaseMinutesAsNumberByOne = minutesTextAsNumber -1;
