@@ -5,18 +5,24 @@
   var seconds = $("#seconds");
   var minutes = $("#minutes");
   var breakButton = $('#break');
+  var longButton = $('#long');
   var isOnBreak = false;
+  var isOnLong = false;
   var timerInterval;
+  var longInterval;
   var stopButton = $("#stop");
   var resetButton = $('#reset');
   var body = $('body');
   var spaceBar = true;
+  var click = 0;
+  var clicked = click +1;
 
   //main functionality
   startButton.on("click", startTimer);
   breakButton.on('click', startBreak);
   stopButton.on('click', stopTimer);
   resetButton.on('click', resetTimer);
+  longButton.on('click', startLong);
   body.on('keyup', keyboardStop);
 
   //function definition
@@ -31,9 +37,24 @@ function startBreak (){
   breakButton.hide();
   //start the timer
   startTimer();
+  // to count amt click
+  var clicked = click + 1;
+  console.log(clicked);
   }
 
-function keyboardStop(e){
+function startLong () {
+  isOnLong = true;
+  //set the minutes to 15 mint
+  minutes.text('00');
+  //set the seconds to 0 seconds
+  seconds.text('05');
+  //hide the long break button
+  longButton.hide();
+  //start the timer
+  startTimer();
+}
+
+function keyboardStop(e) {
   if (!spaceBar) {
     e.keyCode = 32;
     console.log('stuff');
@@ -47,6 +68,7 @@ function keyboardStop(e){
     startTimer();
     spaceBar=false;
 }
+
 }
   function startTimer (){
     console.log(timerInterval);
@@ -58,7 +80,7 @@ function keyboardStop(e){
   function stopTimer(){
     clearInterval(timerInterval);
     timerInterval = null;
-}
+    }
 
   function resetTimer(){
     //reset timer
@@ -66,31 +88,47 @@ function keyboardStop(e){
     if(isOnBreak){
       //empty timer cup
       clearInterval(timerInterval);
-      timerInterval=null;
+      timerInterval = null;
       //add 5 minutes to cup
       minutes.text('00');
-      seconds.text('08');
+      seconds.text('05');
       //reenable start button
       startButton.attr('disabled', false);
       //unhide the break button
       breakButton.hide();
     }
+
+    if (isOnLong){
+      clearInterval(timerInterval);
+      timerInterval=null;
+      //add 15 minutes to cup
+      minutes.text('00');
+      seconds.text('15');
+      //reenable start button
+      startButton.attr('disabled', false);
+      //unhide the break button
+      longButton.hide();
+    }
+
     else {
       //reset to 25 minutes and empty timer cup
       clearInterval(timerInterval);
       timerInterval=null;
       minutes.text('00');
-      seconds.text('10');
+      seconds.text('05');
       //disable start button
       startButton.attr('disabled', false);
       //hide break button
       breakButton.hide();
       isOnBreak=false;
+      longButton.hide();
+      isOnLong=false;
     }
 }
 
-
-
+//keep track of how many times we've clicked shortbreak
+//after 3times disable showrtbreak and enable longbreak
+//then after a long break disable longbreak and enable shortbreak again
 
   function countdown(){
     var secondsText = seconds.text ();
@@ -101,10 +139,10 @@ function keyboardStop(e){
     //console.log(typeof secondsTextAsNumber);
 
     if (minutesTextAsNumber === 0 && secondsTextAsNumber === 0){
-
       //stop!
       clearInterval(timerInterval);
       timerInterval = null;
+
 
       if (!isOnBreak) {
         //disable the start button
@@ -112,11 +150,19 @@ function keyboardStop(e){
         //unhide the break button
         breakButton.show();
 
+      if (!isOnLong ) {
+        if(clicked >3){
+        startButton.attr('disabled' , true);
+        longButton.show();
+      }
+      }
+
     } else {
-      minutes.text('25');
-      seconds.text('00');
+      minutes.text('00');
+      seconds.text('03');
       startButton.attr('disabled', false);
       isOnBreak = false;
+      isOnlong = false;
     }
       return;
   }
@@ -139,7 +185,11 @@ function keyboardStop(e){
     // console.log(secondsValue);
     // seconds.text(pad(secondsValue - 1));
     //transforms letter to text
+
+
   }
+
+
 
     function pad (num){
         if(num < 10){

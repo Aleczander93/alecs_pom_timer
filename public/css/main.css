@@ -18,3 +18,8 @@ h1#timer {
 #stop {
   font-size: 700%;
 }
+
+#long {
+  font-size: 700%;
+  display: none;
+}
