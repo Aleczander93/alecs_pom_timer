@@ -13,7 +13,7 @@
   var resetButton = $('#reset');
   var body = $('body');
   var spaceBar = true;
-  var counter = $('#counter');
+  var count = 0;
 
   //main functionality
   startButton.on("click", startTimer);
@@ -30,14 +30,15 @@ function startBreak (){
   //set the minutes to 5 minutes
   minutes.text('00');
   //set the seconds to 0 seconds
-  seconds.text('05');
+  seconds.text('03');
   //hide the break button
   breakButton.hide();
   longButton.hide();
   //start the timer
   startTimer();
   // to count amt click
-
+  counter=count+1;
+  count=counter;
   }
 
 function startLong () {
@@ -45,7 +46,7 @@ function startLong () {
   //set the minutes to 15 mint
   minutes.text('00');
   //set the seconds to 0 seconds
-  seconds.text('05');
+  seconds.text('03');
   //hide the long break button
   longButton.hide();
   breakButton.hide();
@@ -90,7 +91,7 @@ function keyboardStop(e) {
       timerInterval = null;
       //add 5 minutes to cup
       minutes.text('00');
-      seconds.text('05');
+      seconds.text('03');
       //reenable start button
       startButton.attr('disabled', false);
       //unhide the break button
@@ -114,7 +115,7 @@ function keyboardStop(e) {
       clearInterval(timerInterval);
       timerInterval=null;
       minutes.text('00');
-      seconds.text('05');
+      seconds.text('03');
       //disable start button
       startButton.attr('disabled', false);
       //hide break button
@@ -148,14 +149,12 @@ function keyboardStop(e) {
         //unhide the break button
         breakButton.show();
         //to count after each break
-        var counterText = counter.text ();
-        var countTextAsNumber = parseInt(counterText);
-        countTextAsNumber = countTextAsNumber + 1;
 
-      if (!isOnLong && countTextAsNumber>3) {
+      if (!isOnLong && counter===2) {
         startButton.attr('disabled' , true);
         longButton.show();
         breakButton.hide();
+        count = 0;
         }
 
 
