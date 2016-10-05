@@ -1,5 +1,7 @@
 (function() {
 
+// make audio work!
+
   //initialize variables
   var startButton = $("#start");
   var seconds = $("#seconds");
@@ -14,6 +16,7 @@
   var body = $('body');
   var spaceBar = true;
   var count = 0;
+  var audioFile = new Audio ('');
 
   //main functionality
   startButton.on("click", startTimer);
@@ -142,6 +145,7 @@ function keyboardStop(e) {
       //stop!
       clearInterval(timerInterval);
       timerInterval = null;
+      audioFile.play();
 
       if (!isOnBreak) {
         //disable the start button
