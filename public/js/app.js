@@ -55,6 +55,8 @@ function startLong () {
   breakButton.hide();
   //start the timer
   startTimer();
+  count =0;
+  counter=0;
 }
 
 function keyboardStop(e) {
@@ -154,11 +156,11 @@ function keyboardStop(e) {
         breakButton.show();
         //to count after each break
 
-      if (!isOnLong && counter===2) {
+      if (!isOnLong && counter==2) {
         startButton.attr('disabled' , true);
         longButton.show();
         breakButton.hide();
-        count = 0;
+
         }
 
 
@@ -180,7 +182,6 @@ function keyboardStop(e) {
     seconds.text ("59");
       //then change seconds text to 59
   } else {
-
     var decreasedSecondsAsNumberByOne = secondsTextAsNumber - 1;
     var padSecondsTextAsNumber = pad(decreasedSecondsAsNumberByOne);
     seconds.text(padSecondsTextAsNumber);
@@ -190,11 +191,7 @@ function keyboardStop(e) {
     // console.log(secondsValue);
     // seconds.text(pad(secondsValue - 1));
     //transforms letter to text
-
-
   }
-
-
 
     function pad (num){
         if(num < 10){

@@ -1,25 +1,56 @@
+
+#title {
+  display:flex;
+  justify-content: center;
+  font-size: 600%;
+}
+
 h1#timer {
+  display:flex;
+  justify-content: center;
   font-size: 1600%;
 }
 
+#container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
 #start {
-  font-size: 400%;
+  width:125%;
+  font-size: 200%;
 }
 
 #break {
-  font-size: 400%;
+  width:100%;
+  font-size: 200%;
   display: none;
 }
 
 #reset {
-  font-size: 400%;
+  width:125%;
+  font-size: 200%;
 }
 
 #stop {
-  font-size: 400%;
+  width:125%;
+  font-size: 200%;
 }
 
 #long {
-  font-size: 400%;
+  width:100%;
+  font-size: 200%;
   display: none;
+}
+
+button {
+  margin-top: 3%;
+  display: inline-block;
+}
+
+.row {
+  padding: 0;
+  margin: 0;
 }
