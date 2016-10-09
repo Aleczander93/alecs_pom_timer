@@ -1,26 +1,47 @@
+video#backgroundvid {
+  margin:0;
+  padding: 0;
+  min-width:100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  background-size:cover;
+  z-index: 1;
+  position: absolute;
+}
 
 #title {
   display:flex;
   justify-content: center;
-  font-size: 600%;
+  font-size: 500%;
+  z-index: 2;
+  position: relative;
+  color: #fff;
+  margin:0;
+  padding-top: 50px;
 }
 
 h1#timer {
   display:flex;
   justify-content: center;
   font-size: 1600%;
+  z-index: 2;
+  position: relative;
+  color: #fff;
 }
 
-#container {
+.container {
   display: flex;
   justify-content: center;
+  flex-wrap: nowrap;
   width: 100%;
+  z-index: 2;
+  position: relative;
 }
 
-
 #start {
-  width:125%;
-  font-size: 200%;
+  width:120%;
+  font-size: 250%;
 }
 
 #break {
@@ -30,13 +51,13 @@ h1#timer {
 }
 
 #reset {
-  width:125%;
-  font-size: 200%;
+  width:120%;
+  font-size: 250%;
 }
 
 #stop {
-  width:125%;
-  font-size: 200%;
+  width:120%;
+  font-size: 250%;
 }
 
 #long {

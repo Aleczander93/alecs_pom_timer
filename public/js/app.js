@@ -40,8 +40,12 @@ function startBreak (){
   //start the timer
   startTimer();
   // to count amt click
-  counter=count+1;
-  count=counter;
+  if (count == 3) {
+    count =0;
+  } else {
+    counter=count+1;
+    count=counter;
+  }
   }
 
 function startLong () {
@@ -55,8 +59,6 @@ function startLong () {
   breakButton.hide();
   //start the timer
   startTimer();
-  count =0;
-  counter=0;
 }
 
 function keyboardStop(e) {
@@ -156,12 +158,12 @@ function keyboardStop(e) {
         breakButton.show();
         //to count after each break
 
-      if (!isOnLong && counter==2) {
+      if (!isOnLong && count>2) {
         startButton.attr('disabled' , true);
         longButton.show();
         breakButton.hide();
 
-        }
+      }
 
 
     } else {
